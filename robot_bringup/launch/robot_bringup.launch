@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<launch>
+  <!-- WHEELS -->
+  <include file="$(find robot_bringup)/launch/roboclaw.launch"/>
+
+  <!-- IMU --> 
+  <include file="$(find robot_bringup)/launch/imu.launch"/>
+
+  <!-- GPS -->
+  <include file="$(find robot_bringup)/launch/gps.launch"/>
+
+</launch>
