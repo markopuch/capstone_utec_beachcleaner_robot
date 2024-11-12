@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<launch>
+
+    <arg name="minimum_range" default="3"/>
+    <arg name="maximum_range" default="400"/>
+    <arg name="field_of_view" default="15.0"/>
+    <arg name="trigger" default="18"/>
+    <arg name="echo" default="24"/>
+    <arg name="timeout" default="1000000"/>
+
+    <node ns="hcsr04"  name="ROS_UltrasonicHCSR04" pkg="ROS_HCSR04_RPI4" type="ros_HCSR04"> 
+        <param name="~minimum_range"  type="int" value="$(arg minimum_range)"/>
+        <param name="~maximum_range"  type="int" value="$(arg maximum_range)"/>
+        <param name="~field_of_view"  type="double" value="$(arg field_of_view)"/>
+        <param name="~trigger"  type="int" value="$(arg trigger)"/>
+        <param name="~echo"  type="int" value="$(arg echo)"/>
+        <param name="~timeout"  type="int" value="$(arg timeout)"/>
+    </node>
+
+   
+
+</launch>

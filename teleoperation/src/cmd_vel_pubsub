@@ -1,0 +1,48 @@
+#!/usr/bin/env python3
+import rospy
+from geometry_msgs.msg import Twist
+from std_msgs.msg import Float32 
+
+class Suscriptor_cmdvel(object):
+    def __init__(self):
+        topic = 'cmd_vel'
+        self.pub = rospy.Subscriber(topic, Twist, self.callback_point)
+        self.cmd_vel_msg = Twist()
+        
+    def callback_point(self, msg):
+        self.cmd_vel_msg = msg
+
+    def get_cmd_vel(self):
+        return self.cmd_vel_msg
+
+if __name__ == "__main__": # Inicio del programa principal
+
+    rospy.init_node('nodo_pub_sub_cmd_pc') # Inicializar el nodo
+    sub = Suscriptor_cmdvel() # Crear el suscriptor
+
+    # Declarar del publicador
+    topic_vx = 'cmd_vel_vx' 
+    pub_vx = rospy.Publisher(topic_vx, Float32, queue_size=1)
+    topic_w = 'cmd_vel_w' 
+    pub_w = rospy.Publisher(topic_w, Float32, queue_size=1)
+    
+    # Creación de una instancia (vacía) del mensaje
+    vx_msg = Float32()
+    w_msg = Float32()
+
+    # Tiempo de ejecución del bucle (en Hz)
+    rate = rospy.Rate(100)
+    
+    while not rospy.is_shutdown():
+        # Leer el valor actual (del suscriptor)
+        cmd_vel = sub.get_cmd_vel()
+        # Asignar los valores al mensaje
+        vx_msg.data= cmd_vel.linear.x
+        w_msg.data= cmd_vel.angular.z
+
+        # Publicar el mensaje
+        pub_vx.publish(vx_msg)
+        pub_w.publish(w_msg)
+        
+        # Esperar
+        rate.sleep()

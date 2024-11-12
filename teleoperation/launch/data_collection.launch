@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<launch>
+    <!-- Load the data_collection node -->
+    <node pkg="teleoperation" type="data_collection_gps.py" name="data_collection_gps" output="screen">
+    <node pkg="teleoperation" type="data_collection_imu.py" name="data_collection_imu" output="screen">
+</launch>

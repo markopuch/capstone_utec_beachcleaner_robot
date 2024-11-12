@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+
+    <arg name="minimum_range" default="3"/>
+    <arg name="maximum_range" default="400"/>
+    <arg name="field_of_view" default="15"/>
+    <arg name="trigger_pin" default="18"/>
+    <arg name="echo_pin" default="24"/>
+
+    <node pkg="ros_HCSR04_RPI4" type="ROS_UltrasonicHCSR04.py" name="ROS_UltrasonicHCSR04">
+        <param name="~minimum_range" value="$(arg minimum_range)"/>
+        <param name="~maximum_range" value="$(arg maximum_range)"/>
+        <param name="~field_of_view" value="$(arg field_of_view)"/>
+        <param name="~trigger_pin" value="$(arg trigger_pin)"/>
+        <param name="~echo_pin" value="$(arg echo_pin)"/>
+    </node>
+
+   
+
+</launch>
